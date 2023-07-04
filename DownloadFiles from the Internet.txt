@@ -1,0 +1,26 @@
+-- URL и путь для сохранения картинки
+local url = "https://wotpack.ru/wp-content/uploads/2022/05/word-image-549.jpeg"
+local path = "/sdcard/Download/image.jpeg"
+
+-- Функция загрузки картинки
+local function downloadImage()
+  local success, image = pcall(gg.makeRequest, url, nil, nil, nil, nil, true)
+  if success and image ~= nil then
+    local file = io.open(path, "wb")
+    file:write(image.content)
+    file:close()
+    return true
+  else
+    return false
+  end
+end
+
+-- Вызов функции загрузки картинки
+local success = downloadImage()
+
+if success then
+  gg.alert("Картинка успешно загружена и сохранена на устройстве:\n" .. path)
+else
+  gg.alert("Ошибка загрузки картинки.")
+end
+вот код для сохранения любых медиа с помощью скрипта
